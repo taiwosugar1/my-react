@@ -4,7 +4,7 @@ import { AuthContext } from '../../context/authContext';
 
 
 const Stories = () => {
-    const {currentUsser} =useContext(AuthContext)
+    const {currentUser} =useContext(AuthContext)
 
     //temporary
     const stories =[ 
@@ -73,8 +73,8 @@ const Stories = () => {
   return (
     <div className='stories'>
          <div className="story">
-            <img src={currentUsser.ProfilePic} alt="" />
-            <span>{currentUsser.name}</span>
+            <img src={currentUser.ProfilePic} alt="" />
+            <span>{currentUser.name}</span>
             <button>+</button>
 
         </div>

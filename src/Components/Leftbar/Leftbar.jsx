@@ -13,7 +13,7 @@ import { AuthContext } from '../../context/authContext'
 
 const Leftbar = () => {
 
-  const {currentUsser}=useContext(AuthContext);
+  const {currentUser}=useContext(AuthContext);
 
   return (
     <div className='leftbar'>
@@ -21,8 +21,8 @@ const Leftbar = () => {
         <div className="menu">
           <div className="user">
 
-        <img src={currentUsser.profilePic} alt="" />
-       <span>currentUsser.name</span>
+        <img src={currentUser.profilePic} alt="" />
+       <span>currentUser.name</span>
           
           
           </div>

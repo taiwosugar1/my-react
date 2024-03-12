@@ -1,10 +1,10 @@
 import { createContext, useEffect, useState } from "react";
-import { json } from "react-router-dom";
+
 
 export  const AuthContext = createContext();
 
 export const  AuthContextProvider =({children}) =>{
-    const [currentUsser, setCurrentUser] = useState(
+    const [currentUser, setCurrentUser] = useState(
        JSON.parse(localStorage.getItem("User")) || null
     );
 
@@ -19,11 +19,11 @@ export const  AuthContextProvider =({children}) =>{
     };
 
     useEffect(()=>{
-        localStorage.setItem("User", JSON.stringify(currentUsser));
-    },[currentUsser]);
+        localStorage.setItem("User", JSON.stringify(currentUser));
+    },[currentUser]);
 
     return(
-        <AuthContext.Provider value={{ currentUsser, login }}>
+        <AuthContext.Provider value={{ currentUser, login }}>
             {children}
             </AuthContext.Provider>
     );

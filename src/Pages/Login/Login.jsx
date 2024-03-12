@@ -9,7 +9,7 @@ const Login = () => {
   
   const handleLogin = () => {
     login();
-  }
+  };
   
   return (
     <div className='login'>
