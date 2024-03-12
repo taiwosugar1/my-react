@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/my-react/static/css/main.02fb454f.css",
-    "main.js": "/my-react/static/js/main.844df8a6.js",
-    "static/js/453.4a6fd61d.chunk.js": "/my-react/static/js/453.4a6fd61d.chunk.js",
-    "static/media/message.jpg": "/my-react/static/media/message.f848e80388f1a0fc366c.jpg",
-    "static/media/watch.jpg": "/my-react/static/media/watch.ec8cf3de3eced9962e22.jpg",
-    "static/media/videos.jpg": "/my-react/static/media/videos.e6d49bef0792eb215219.jpg",
-    "static/media/fund.jpg": "/my-react/static/media/fund.bd47dd80c920b6ebbac5.jpg",
-    "static/media/gaming.jpg": "/my-react/static/media/gaming.56d6669f65b96dd2f600.jpg",
-    "static/media/gallery.jpg": "/my-react/static/media/gallery.a4fedff1a0cb7e5a0282.jpg",
-    "static/media/friends.png": "/my-react/static/media/friends.d27d2612fe7d45edf8a6.png",
-    "static/media/group.png": "/my-react/static/media/group.a329c987afe714c84b4e.png",
-    "static/media/market.png": "/my-react/static/media/market.7b17e4780c14ca305d37.png",
-    "index.html": "/my-react/index.html",
-    "main.02fb454f.css.map": "/my-react/static/css/main.02fb454f.css.map",
-    "main.844df8a6.js.map": "/my-react/static/js/main.844df8a6.js.map",
-    "453.4a6fd61d.chunk.js.map": "/my-react/static/js/453.4a6fd61d.chunk.js.map"
+    "main.css": "/mb/static/css/main.02fb454f.css",
+    "main.js": "/mb/static/js/main.8ea9ea5a.js",
+    "static/js/453.4a6fd61d.chunk.js": "/mb/static/js/453.4a6fd61d.chunk.js",
+    "static/media/message.jpg": "/mb/static/media/message.f848e80388f1a0fc366c.jpg",
+    "static/media/watch.jpg": "/mb/static/media/watch.ec8cf3de3eced9962e22.jpg",
+    "static/media/videos.jpg": "/mb/static/media/videos.e6d49bef0792eb215219.jpg",
+    "static/media/fund.jpg": "/mb/static/media/fund.bd47dd80c920b6ebbac5.jpg",
+    "static/media/gaming.jpg": "/mb/static/media/gaming.56d6669f65b96dd2f600.jpg",
+    "static/media/gallery.jpg": "/mb/static/media/gallery.a4fedff1a0cb7e5a0282.jpg",
+    "static/media/friends.png": "/mb/static/media/friends.d27d2612fe7d45edf8a6.png",
+    "static/media/group.png": "/mb/static/media/group.a329c987afe714c84b4e.png",
+    "static/media/market.png": "/mb/static/media/market.7b17e4780c14ca305d37.png",
+    "index.html": "/mb/index.html",
+    "main.02fb454f.css.map": "/mb/static/css/main.02fb454f.css.map",
+    "main.8ea9ea5a.js.map": "/mb/static/js/main.8ea9ea5a.js.map",
+    "453.4a6fd61d.chunk.js.map": "/mb/static/js/453.4a6fd61d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.02fb454f.css",
-    "static/js/main.844df8a6.js"
+    "static/js/main.8ea9ea5a.js"
   ]
 }
