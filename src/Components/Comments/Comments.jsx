@@ -1,12 +1,8 @@
-import { useContext } from "react";
+
 import "./Comments.scss";
-import {AuthContext} from '../../context/authContext'
+
 
 const Comments = () => {
-
-//temporary
-
-const {currentUser} = useContext(AuthContext)
 
 const comments = [ 
     { 
@@ -25,32 +21,27 @@ const comments = [
        name: "Michael Olawale",
        userId: 2,
        profilePicture:
-       <img src= "https://images.pexels.com/photos/163443/war-desert-guns-gunshow-163443.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" />,
+       "https://images.pexels.com/photos/287240/pexels-photo-287240.jpeg?auto=compress&cs=tinysrgb&w=600" ,
        
        
    },
    ];
 
   return (
-    <div className="comments">
-      <div className="write">
-      <img src={currentUser.profilePic} alt="" />
- <input type="text" placeholder="write a comment" />  
- <button></button>   
-      </div>
-      {comments.map(comment=>(
+    <div className="comments">{
+      comments.map(comment=>(
         <div className="comment">
-            <img src={comment.profilePicture} alt="" />
-            <div className="info">
-                <span>{comment.name}</span>
-                <p>{comment.desc}</p>
-            </div>
-           
-            <span className="date">1 hour AGO</span>
+          <img src={comment.profilePicture} alt="" />
+          <div className="info">
+            <span>{comment.name}</span>
+            <p>{comment.desc}</p>
+          </div>
+          <span className="date">1 hour ago</span>
         </div>
-      ))}
-    </div>
-  )
-}
+      ))
+    }
+  </div>
+  );
+;}
 
 export default Comments

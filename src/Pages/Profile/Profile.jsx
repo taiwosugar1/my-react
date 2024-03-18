@@ -6,8 +6,9 @@ import PinterestIcon from '@mui/icons-material/Pinterest';
 import XIcon from '@mui/icons-material/X';
 import PlaceIcon from '@mui/icons-material/Place';
 import LanguageIcon from '@mui/icons-material/Language';
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';import MoreVertIcon from '@mui/icons-material/MoreVert';
-import Posts from "../../Components/posts/Posts"
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import Posts from "../../Components/posts/Posts";
 
 
 const Profile = () => {

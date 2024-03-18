@@ -9,6 +9,7 @@
        border-radius: 20px;
        background-color: themed("bg");
        color: themed("textColor");
+       
 
     .container{
         padding: 20px;
@@ -16,7 +17,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            .user{
+            .userInfo{
                 gap: 20px;
                 display: flex;
                 img{
@@ -24,6 +25,7 @@
                     height: 40px;
                     border-radius: 50%;
                     object-fit: cover;
+                    gap: 20px;
                 }
                 .details{
                     display: flex;
@@ -33,19 +35,34 @@
                         font-weight: 500;
 
                     }
-                    .date{font-size: 12px;}
+                    .date{font-size: 12px;
+                    }
                 }
             }
         }
       
         .content{
-            margin: 20px 0px;
+            
+            padding-left: -50px;
 
             img{
                 width: 100%;
                 max-height: 500px;
                 object-fit: cover;
-                margin: 20px;
+                border-radius: 10px;
+            }
+            
+        }
+        .info{
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            .items{
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                cursor: pointer;
+                font-size: 14px;
             }
         }
     }

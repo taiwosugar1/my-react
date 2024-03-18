@@ -1,7 +1,8 @@
-import React from 'react'
-import './Home.scss'
+import "./Home.scss"
+
 import Stories from '../../Components/stories/Stories'
-import Posts from '../../Components/posts/Posts'
+import './Home.scss'
+import Posts from "../../Components/posts/Posts"
 const Home = () => {
   return (
     <div className='home'>
