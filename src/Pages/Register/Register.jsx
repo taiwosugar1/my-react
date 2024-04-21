@@ -1,9 +1,31 @@
 
-import { Link } from 'react-router-dom'
-import './Register.scss'
+import { Link, useNavigate } from 'react-router-dom';
+import './Register.scss';
+import { useState } from 'react';
+import axios from 'axios';
 
 
 const Register = () => {
+  const [username, setUsername] = useState('')
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState()
+
+
+  let navigate = useNavigate()
+
+  const handleSubmit = (e)=>{
+    e.preventDefault()
+    let Userdata ={ username, name, email, password }
+  axios.post('http://localhost:3001/register', Userdata )
+  .then((res)=>{
+    alert("Data is successfully added")
+  navigate('/login')
+
+}).catch((err) => {
+  console.log(err.message);
+})
+};
 
 
 
@@ -21,14 +43,17 @@ const Register = () => {
           <button>Login</button>
           </Link>
       </div>
+      <hr/>
       <div className="right">
           <h1>Register</h1>
-          <form>
-              <input type="text" placeholder='Username' />
-              <input type="email" placeholder='Email' />
-              <input type="text" placeholder='Name' />
-              <input type="password" placeholder='Password' />
-              <button>Register</button>
+          <form onSubmit={handleSubmit}>
+              <input type="text" placeholder=' Enter Username' value={username} onChange={(e)=>setUsername(e.target.value)} required />
+              <input type="name" placeholder='Enter Name' value={name} onChange={(e)=>setName(e.target.value)} required/>
+              <input type="email" placeholder='Enter Email' value={email} onChange={(e)=>setEmail(e.target.value)} required/>
+              <input type="password" placeholder='Enter Password' value={password} onChange={(e)=>setPassword(e.target.value)} required/>
+              <button>Submit</button>
+              
+          
           </form>
       </div>
     </div>

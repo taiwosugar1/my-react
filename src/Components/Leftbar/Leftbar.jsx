@@ -9,9 +9,13 @@ import Videos from '../../Asset/videos.jpg'
 import Gaming from '../../Asset/gaming.jpg'
 import Watch from '../../Asset/watch.jpg'
 import Fund from '../../Asset/fund.jpg'
+import { AuthContext } from '../../context/authContext'
+import { useContext } from 'react'
 
 
 const Leftbar = () => {
+
+  const {currentUser } = useContext(AuthContext);
 
 
 
@@ -21,78 +25,78 @@ const Leftbar = () => {
         <div className="menu">
           <div className="user">
 
-        <img src="https://images.pexels.com/photos/287240/pexels-photo-287240.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" />
-       <span>Oguntoyinbo Taiwo</span>
+        <img src={currentUser.profilePic} alt="" />
+       <span>{currentUser.name}</span>
           
           
           </div>
           <div className="item">
-            <img src={Friends} alt="" />
-            <span>Friends</span>
+            <img src={Friends} alt="" style={{cursor: "pointer"}}/>
+            <span style={{cursor: "pointer"}}>Friends</span>
+          </div>
+          <div className="item" >
+            <img src={Group} alt="" style={{cursor: "pointer"}} />
+            <span style={{cursor: "pointer"}}>Groups</span>
           </div>
           <div className="item">
-            <img src={Group} alt="" />
-            <span>Groups</span>
+            <img src={Message} alt="" style={{cursor: "pointer"}}/>
+            <span style={{cursor: "pointer"}}>Message</span>
           </div>
           <div className="item">
-            <img src={Message} alt="" />
-            <span>Message</span>
+            <img src={Market} alt="" style={{cursor: "pointer"}}/>
+            <span style={{cursor: "pointer"}}>Market</span>
           </div>
           <div className="item">
-            <img src={Market} alt="" />
-            <span>Market</span>
+            <img src={Gallery} alt="" style={{cursor: "pointer"}}/>
+            <span style={{cursor: "pointer"}}>Gallery</span>
           </div>
           <div className="item">
-            <img src={Gallery} alt="" />
-            <span>Gallery</span>
+            <img src={Videos} alt="" style={{cursor: "pointer"}}/>
+            <span style={{cursor: "pointer"}}>Video</span>
           </div>
           <div className="item">
-            <img src={Videos} alt="" />
-            <span>Video</span>
+            <img src={Gaming} alt="" style={{cursor: "pointer"}} />
+            <span style={{cursor: "pointer"}}>Gaming</span>
           </div>
           <div className="item">
-            <img src={Gaming} alt="" />
-            <span>Gaming</span>
+            <img src={Watch} alt="" style={{cursor: "pointer"}}/>
+            <span style={{cursor: "pointer"}}>Watch</span>
           </div>
           <div className="item">
-            <img src={Watch} alt="" />
-            <span>Watch</span>
-          </div>
-          <div className="item">
-            <img src={Fund} alt="" />
-            <span>Fund</span>
+            <img src={Fund} alt="" style={{cursor: "pointer"}}/>
+            <span style={{cursor: "pointer"}}>Fund</span>
           </div>
         </div>
         <hr/>
         <div className="menu">
-          <span>Your shorcut</span>
+          <span style={{cursor: "pointer"}}>Your shorcut</span>
           <div className="item">
-            <img src={Gallery} alt="" />
-            <span>Gallery</span>
+            <img src={Gallery} alt="" style={{cursor: "pointer"}}/>
+            <span style={{cursor: "pointer"}}>Gallery</span>
           </div>
           <div className="item">
-            <img src={Videos} alt="" />
-            <span>Video</span>
+            <img src={Videos} alt="" style={{cursor: "pointer"}}/>
+            <span style={{cursor: "pointer"}}>Video</span>
           </div>
           <div className="item">
-            <img src={Gaming} alt="" />
-            <span>Gaming</span>
+            <img src={Gaming} alt="" style={{cursor: "pointer"}}/>
+            <span style={{cursor: "pointer"}}>Gaming</span>
           </div>
           <div className="item">
-            <img src={Watch} alt="" />
-            <span>Watch</span>
+            <img src={Watch} alt="" style={{cursor: "pointer"}}/>
+            <span style={{cursor: "pointer"}}>Watch</span>
           </div>
           </div>
           <hr/>
           <div className="menu">
-            <span>Others</span>
+            <span style={{cursor: "pointer"}}>Others</span>
             <div className="item">
-            <img src={Watch} alt="" />
-            <span>Watch</span>
+            <img src={Watch} alt="" style={{cursor: "pointer"}}/>
+            <span style={{cursor: "pointer"}}>Watch</span>
           </div>
           <div className="item">
-            <img src={Fund} alt="" />
-            <span>Fund</span>
+            <img src={Fund} alt="" style={{cursor: "pointer"}}/>
+            <span style={{cursor: "pointer"}}>Fund</span>
           </div>
           </div>
       </div>

@@ -10,11 +10,14 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import { Link } from 'react-router-dom';
 import { DarkModeContext } from '../../context/DarkModeContext';
+import { AuthContext } from '../../context/authContext';
 
 
 const Navbar = () => {
 
-   const {toggle} = useContext(DarkModeContext);
+   const {toggle, DarkMode} = useContext(DarkModeContext);
+   const {currentUser } = useContext(AuthContext);
+   
    
 
   return (
@@ -24,28 +27,28 @@ const Navbar = () => {
     <Link to="/" style={{textDecoration:"none"}}>
      <span>Multibrand App</span>
      </Link>
-     <HomeOutlinedIcon/>
-     <DarkModeOutlinedIcon onClick={toggle}/>
-     <GridViewOutlinedIcon/>
-     <WbSunnyOutlinedIcon/>
+     <HomeOutlinedIcon style={{cursor: "pointer"}}/>
+     <DarkModeOutlinedIcon onClick={toggle} style={{cursor: "pointer"}}/>
+     <GridViewOutlinedIcon style={{cursor: "pointer"}}/>
+     <WbSunnyOutlinedIcon style={{cursor: "pointer"}}/>
 
 
      <div className="search">
-      <SearchOutlinedIcon/>
+      <SearchOutlinedIcon style={{cursor: "pointer"}}/>
       <input type="text" placeholder='Search...'/>
      </div>
      
   </div>
 
   <div className="right">
-     <PersonOutlinedIcon/>
-     <EmailOutlinedIcon/>
-     <NotificationsOutlinedIcon/>
+     <PersonOutlinedIcon style={{cursor: "pointer"}}/>
+     <EmailOutlinedIcon style={{cursor: "pointer"}}/>
+     <NotificationsOutlinedIcon style={{cursor: "pointer"}}/>
      <div className="user">
 
-     <img src="https://images.pexels.com/photos/287240/pexels-photo-287240.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" />
+     <img src={currentUser.profilePic } alt="" />
        
-      <span>Oguntoyinbo Taiwo</span>
+      <span>{currentUser.name}</span>
      </div>
   </div>
 

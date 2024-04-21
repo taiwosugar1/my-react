@@ -9,6 +9,7 @@
        border-radius: 20px;
        background-color: themed("bg");
        color: themed("textColor");
+       margin-top: 20px;
        
 
     .container{
@@ -42,14 +43,15 @@
         }
       
         .content{
-            
-            padding-left: -50px;
+            margin: 20px 0px;
 
             img{
                 width: 100%;
                 max-height: 500px;
                 object-fit: cover;
                 border-radius: 10px;
+                margin-top: 20px;
+
             }
             
         }

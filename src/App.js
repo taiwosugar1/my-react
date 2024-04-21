@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import './App.css';
 import Login from './Pages/Login/Login';
@@ -8,7 +8,9 @@ import Leftbar from './Components/Leftbar/Leftbar';
 import Rightbar from './Components/Rightbar/Rightbar';
 
 import './Style.scss'
+import { useContext } from 'react';
 import { DarkModeContext } from './context/DarkModeContext';
+import { AuthContext } from './context/authContext';
 
 import Home from './Pages/Home/Home';
 
@@ -18,8 +20,12 @@ import Home from './Pages/Home/Home';
 
 function App() {
 
+  const {currentUser} = useContext(AuthContext)
+  console.log(currentUser)
+
+
   const {darkMode}=useContext(DarkModeContext);
-  console.log(darkMode)
+  // console.log(darkMode)
 
 const Layout = () =>{
   return(
@@ -50,7 +56,7 @@ const Layout = () =>{
         element: <Home/>
       },
       {
-        path:"/Profile:id",
+        path:"/profile/:id",
         element: <Profile/>
       },
  

@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-//import { json } from "react-router-dom";
+
 
 
 export const DarkModeContext = createContext()
@@ -8,7 +8,7 @@ export const  DarkModeContextProvider =({children}) =>{
        //JSON.parse(localStorage.getItem("darkMode")) || false
     );
     const toggle = ()=>{
-        setDarkMode(!darkMode)
+        setDarkMode(!darkMode);
     };
 
     useEffect(()=>{
