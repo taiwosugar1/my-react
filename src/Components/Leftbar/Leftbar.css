@@ -1,0 +1,76 @@
+.leftbar {
+  flex: 2;
+  position: sticky;
+  top: 70px;
+  padding-left: 20px;
+  height: calc(100vh - 70px);
+  overflow: scroll;
+  background-color: #f0f0f0; /* Replace themed("bg") with static value */
+  color: #333; /* Replace themed("textColor") with static value */
+  -moz-box-shadow: 0px 2px 16px 2px rgba(0, 0, 0, 0.09);
+  -webkit-box-shadow: 0px 2px 16px 2px rgba(0, 0, 0, 0.09);
+  box-shadow: 0px 2px 16px 2px rgba(0, 0, 0, 0.09);
+}
+
+.leftbar::-webkit-scrollbar {
+  display: none;
+}
+
+.leftbar .container {
+  padding: 20px;
+}
+
+.leftbar .container hr {
+  margin: 20px 0px;
+  border: none;
+  height: 0.5px;
+  background-color: #ddd; /* Replace themed("border") with static value */
+}
+
+.leftbar .container .menu {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.leftbar .container .menu span {
+  font-size: 14px;
+  color: blue;
+}
+
+.leftbar .container .menu .user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.leftbar .container .menu .user img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.leftbar .container .item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.leftbar .container .item img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.leftbar .container .item span {
+  font-size: 14px;
+}
+
+/* Mobile styles (Replace @include mobile with media query) */
+@media (max-width: 768px) {
+  .leftbar {
+    position: absolute;
+  }
+}

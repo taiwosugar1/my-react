@@ -1,29 +1,61 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from 'react';
+import {
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+} from 'firebase/auth';
+import { auth } from '../firebase';
 
+export const AuthContext = createContext();
 
-export  const AuthContext = createContext();
+export const AuthProvider = ({ children }) => {
+  const [currentUser, setCurrentUser] = useState(null);
 
-export const  AuthContextProvider = ({children}) =>{
-    const [currentUser, setCurrentUser] = useState(
-       JSON.parse(localStorage.getItem("User")) || true
-    );
+  // Subscribe to Firebase auth state changes
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+    });
+    return () => unsubscribe(); // Cleanup subscription on unmount
+  }, []);
 
-        const login = async ()=>{
-        setCurrentUser({
-            id: 1,
-             name:"oguntoyinbo taiwo",
+  // Login function
+  const login = async (email, password) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      setCurrentUser(userCredential.user); // Update currentUser state on successful login
+    } catch (error) {
+      console.error('Login error:', error.message);
+      throw error; // Rethrow error for handling in the component
+    }
+  };
 
-             profilePic:
-             "https://images.pexels.com/photos/2216607/pexels-photo-2216607.jpeg?auto=compress&cs=tinysrgb&w=600"
-    })};
+  // Register function
+  const register = async (email, password) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      setCurrentUser(userCredential.user); // Update currentUser state on successful registration
+    } catch (error) {
+      console.error('Registration error:', error.message);
+      throw error; // Rethrow error for handling in the component
+    }
+  };
 
-    useEffect(()=>{
-        localStorage.setItem("user", JSON.stringify(currentUser));
-    }, [currentUser]);
+  // Logout function
+  const logout = async () => {
+    try {
+      await signOut(auth);
+      setCurrentUser(null); // Clear the currentUser state on logout
+    } catch (error) {
+      console.error('Logout error:', error.message);
+      throw error;
+    }
+  };
 
-    return(
-        <AuthContext.Provider value={{ currentUser, login }}>
-            {children}
-            </AuthContext.Provider>
-    );
+  return (
+    <AuthContext.Provider value={{ currentUser, login, register, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };

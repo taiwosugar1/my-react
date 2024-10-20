@@ -1,45 +1,60 @@
+// Login.js
+import { Link, useNavigate } from 'react-router-dom';
+import './Login.css';
+import { useState, useContext } from 'react';
+import { AuthContext } from '../../context/authContext'; // Import AuthContext
 
-import { Link } from 'react-router-dom';
-import './Login.scss';
-import { useContext } from 'react';
-import { AuthContext } from '../../context/authContext';
+const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { login } = useContext(AuthContext); // Use the login function from AuthContext
+  const navigate = useNavigate();
 
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await login(email, password); // Use the login function from context
+      navigate('/home'); // Navigate to home after successful login
+    } catch (error) {
+      console.error(error.message);
+      alert('Login failed. Please check your credentials and try again.'); // More informative alert
+    }
+  };
 
-const  Login = () => {
-  const {login} = useContext(AuthContext);
-  const handleLogin = ()=> {
-    login();
-  }
- 
-
-
-  
   return (
-    <div className='login'>
-     
+    <div className="login">
       <div className="card">
         <div className="left">
-            <h1>Hello World</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit ut quos maiores? Voluptate hic ut minima. Id vel alias laudantium!
-            </p>
-            <span>Dont you have an account?</span>
-            <Link to="/register">
+          <h1>Hello World</h1>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+          <span>Don't have an account?</span>
+          <Link to="/register">
             <button>Register</button>
-            </Link>
+          </Link>
         </div>
         <div className="right">
-            <h1>login</h1>
-            <form>
-                <input type="email" placeholder='Enter email'  />
-                <input type="password" placeholder='password'/>
-                <button  onClick={handleLogin}>Login</button>
-                
-            </form>
+          <h1>Login</h1>
+          <form onSubmit={handleLogin}>
+            <input
+              type="email"
+              placeholder="Enter email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <button type="submit">Login</button>
+          </form>
         </div>
       </div>
-      
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

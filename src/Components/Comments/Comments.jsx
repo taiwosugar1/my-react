@@ -1,59 +1,159 @@
-
-import { useContext} from "react";
-import "./Comments.scss";
+import React, { useContext, useEffect, useState } from "react";
+import { collection, getDocs, query, where, addDoc, updateDoc, deleteDoc, doc, Timestamp, increment } from "firebase/firestore";
 import { AuthContext } from "../../context/authContext";
+import { db } from "../../firebase";
+import "./Comments.scss"
 
+const Comments = ({ postId }) => {
+    const { currentUser } = useContext(AuthContext);
+    const [comments, setComments] = useState([]);
+    const [newComment, setNewComment] = useState("");
+    const [editCommentId, setEditCommentId] = useState(null);
+    const [editCommentText, setEditCommentText] = useState("");
 
-const Comments = () => {
+    useEffect(() => {
+        const fetchComments = async () => {
+            const commentsCollection = collection(db, "comments");
+            const q = query(commentsCollection, where("postId", "==", postId));
+            const commentSnapshot = await getDocs(q);
+            const commentsList = commentSnapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+            setComments(commentsList);
+        };
 
-  const {currentUser} = useContext(AuthContext);
+        fetchComments();
+    }, [postId]);
 
-  //temporary
-const comments = [ 
-    { 
-       id: 1,
-       desc: "Nemo, consequatuLorem ipsum dolor sit, amet consectetur adipisicing elir",
-        name: "Oguntoyinbo Taiwo",
-        userId: 1,
-        profilePicture:
-         "https://images.pexels.com/photos/6405664/pexels-photo-6405664.jpeg?auto=compress&cs=tinysrgb&w=600",
-        
-        
-    },
-    { 
-      id: 2,
-      desc: "tetuLorem ipsur adipisicing elit. Nemo, Lorem ipsum dolor sit, amet co sit, amet consectetuconsequatur",
-       name: "Michael Olawale",
-       userId: 2,
-       profilePicture:
-       "https://images.pexels.com/photos/287240/pexels-photo-287240.jpeg?auto=compress&cs=tinysrgb&w=600" ,
-       
-       
-   },
-   ];
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (newComment.trim() === "") return;
 
-  return (
-    <div className="comments">
-      <div className="write">
-        {/* <img src="https://images.pexels.com/photos/2216607/pexels-photo-2216607.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" /> */}
-       <img src={currentUser.profilePic} alt="" />
-      <input type="text" placeholder="write a comment"/>
-      <button>send</button>
-      </div>
+        const postRef = doc(db, "posts", postId);
 
-      {comments.map(comment=>(
-        <div className="comment">
-          <img src={comment.profilePicture} alt="" />
-          <div className="info">
-            <span>{comment.name}</span>
-            <p>{comment.desc}</p>
-          </div>
-          <span className="date">1 hour ago</span>
+        try {
+            const commentData = {
+                postId,
+                desc: newComment,
+                name: currentUser.name || "Anonymous",
+                profilePicture: currentUser.profilePic || "defaultProfilePic.jpg",
+                userId: currentUser.uid, // Ensure userId is stored in comments
+                timestamp: Timestamp.now(),
+            };
+
+            await addDoc(collection(db, "comments"), commentData);
+            await updateDoc(postRef, {
+                commentsCount: increment(1),
+            });
+
+            setComments((prevComments) => [
+                ...prevComments,
+                { ...commentData, id: new Date().getTime().toString() },
+            ]);
+            setNewComment("");
+        } catch (error) {
+            console.error("Error adding comment:", error);
+        }
+    };
+
+    const handleEdit = (comment) => {
+        setEditCommentId(comment.id);
+        setEditCommentText(comment.desc);
+    };
+
+    const handleUpdate = async (e) => {
+        e.preventDefault();
+        if (editCommentText.trim() === "") return;
+
+        try {
+            const commentRef = doc(db, "comments", editCommentId);
+            await updateDoc(commentRef, {
+                desc: editCommentText,
+            });
+
+            setComments((prevComments) =>
+                prevComments.map((comment) =>
+                    comment.id === editCommentId ? { ...comment, desc: editCommentText } : comment
+                )
+            );
+
+            setEditCommentId(null);
+            setEditCommentText("");
+        } catch (error) {
+            console.error("Error updating comment:", error);
+        }
+    };
+
+    const handleDelete = async (commentId) => {
+        if (window.confirm("Are you sure you want to delete this comment?")) {
+            try {
+                const commentRef = doc(db, "comments", commentId);
+                await deleteDoc(commentRef);
+
+                // Update comments count in the post
+                const postRef = doc(db, "posts", postId);
+                await updateDoc(postRef, {
+                    commentsCount: increment(-1), // Decrement comment count
+                });
+
+                setComments((prevComments) => prevComments.filter((comment) => comment.id !== commentId));
+            } catch (error) {
+                console.error("Error deleting comment:", error);
+            }
+        }
+    };
+
+    return (
+        <div className="comments">
+            <div className="write">
+                <img src={currentUser.profilePic} alt="" />
+                <input
+                    type="text"
+                    placeholder="Write a comment..."
+                    value={newComment}
+                    onChange={(e) => setNewComment(e.target.value)}
+                />
+                <button onClick={handleSubmit}>Send</button>
+            </div>
+
+            {comments.length > 0 ? (
+                comments.map((comment) => (
+                    <div className="comment" key={comment.id}>
+                        <img src={comment.profilePicture} alt="" />
+                        <div className="info">
+                            <span>{comment.name}</span>
+                             {currentUser.uid === comment.userId && ( // Assuming you have userId stored in the comment
+                            <div className="actions">
+                                <button onClick={() => handleEdit(comment)}>Edit</button>
+                                <button onClick={() => handleDelete(comment.id)}>Delete</button>
+                            </div>
+                        )}
+                            {editCommentId === comment.id ? (
+                              
+                                <>
+                                    <input
+                                        type="text"
+                                        value={editCommentText}
+                                        onChange={(e) => setEditCommentText(e.target.value)}
+                                    />
+                                    <button onClick={handleUpdate}>Update</button>
+                                </>
+                            ) : (
+                                <p>{comment.desc}</p>
+                            )}
+                        </div>
+                        <span className="date">
+                            {comment.timestamp?.toDate().toLocaleString() || "Just now"}
+                        </span>
+                       
+                    </div>
+                ))
+            ) : (
+                <p>No comments yet. Be the first to comment!</p>
+            )}
         </div>
-      ))
-    }
-  </div>
-  );
-;}
+    );
+};
 
-export default Comments
+export default Comments;

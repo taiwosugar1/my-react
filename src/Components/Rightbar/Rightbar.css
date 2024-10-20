@@ -1,0 +1,72 @@
+.rightbar {
+   flex: 2;
+   position: sticky;
+    top: 0px;
+    overflow: auto;
+    width: 300px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px 0;
+   
+  }
+  
+  .rightbar .container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .rightbar .item {
+    margin-bottom: 20px;
+  }
+  
+  .rightbar .item span {
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+  }
+  
+  .rightbar .user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #e9ecef;
+  }
+  
+  .rightbar .user:last-child {
+    border-bottom: none; /* Remove border for last item */
+  }
+  
+  .rightbar .user .userinfo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .rightbar .user .userinfo img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .rightbar .user .userinfo span {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .rightbar .user button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .rightbar .user button:hover {
+    background-color: #0056b3;
+  }
+  

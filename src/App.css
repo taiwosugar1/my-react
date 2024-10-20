@@ -1,0 +1,103 @@
+/* Dark Mode Variables */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --primary-color: #007bff;
+    --primary-color-dark: #0056b3;
+    --border-color: #dddddd;
+  }
+  
+  :root.dark-mode {
+    --bg-color: #333333;
+    --text-color: #ffffff;
+    --primary-color: #f39c12;
+    --primary-color-dark: #e67e22;
+    --border-color: #555555;
+  }
+  
+
+/* App.css or Style.scss */
+.layout-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    position: relative;
+  }
+  
+  .leftbar-container {
+    flex: 1;
+    max-width: 250px;
+  }
+  
+  .rightbar-container {
+    flex: 1;
+    max-width: 300px;
+    top: 0;
+    position: sticky;
+  }
+  
+  .content-container {
+    flex: 4;
+    max-width: 800px;
+  }
+
+  /* Scroll to Top Button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 70px;
+    right: 7px;
+    background: var(--text-color);
+    border: 1px solid white;
+    color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    opacity: 0.9;
+    z-index: 2000;
+  }
+  
+  .scroll-to-top:hover {
+    opacity: 1;
+  }
+  
+  /* Responsive styles for mobile */
+  @media screen and (max-width: 768px) {
+    .layout-container {
+      flex-direction: column;
+    }
+  
+    .leftbar-container,
+    .rightbar-container {
+      display: none;
+    }
+  
+    .content-container {
+      flex: 1;
+      margin: 0 auto;
+      width: 100%;
+    }
+  }
+  
+  /* Navbar responsive styles */
+  .nav {
+    width: 100%;
+    padding: 10px 0;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+    }
+  }
+  

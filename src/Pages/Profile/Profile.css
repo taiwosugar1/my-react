@@ -1,0 +1,222 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  background-color: #f9f9f9;
+}
+
+.profile .images {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 1000px;
+  margin-bottom: 20px;
+}
+
+.profile .images .cover {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.4s ease-in-out;
+}
+
+.profile .images .cover:hover {
+  transform: scale(1.05);
+}
+
+.profile .images .profilePic {
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid #fff;
+  transition: transform 0.4s ease-in-out, box-shadow 0.3s;
+}
+
+.profile .images .profilePic:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.profile .profileContainer {
+  width: 100%;
+  max-width: 1000px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 60px;
+}
+
+.profile .profileContainer .userInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile .profileContainer .userInfo .leeft,
+.profile .profileContainer .userInfo .riight {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.profile .profileContainer .userInfo .leeft a,
+.profile .profileContainer .userInfo .riight a {
+  color: #333;
+  transition: color 0.3s, transform 0.4s ease-in-out;
+}
+
+.profile .profileContainer .userInfo .leeft a:hover,
+.profile .profileContainer .userInfo .riight a:hover {
+  color: #0073b1;
+  transform: scale(1.1);
+}
+
+.profile .profileContainer .userInfo .center {
+  text-align: center;
+}
+
+.profile .profileContainer .userInfo .center span {
+  display: block;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.profile .profileContainer .userInfo .center .info {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  font-size: 14px;
+  color: #777;
+}
+
+.profile .profileContainer .userInfo .center .info .item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.profile .profileContainer .userInfo .center button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease, transform 0.3s ease-in-out;
+}
+
+.profile .profileContainer .userInfo .center button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.profile .profileContainer .editProfileBtn {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.profile .profileContainer .editProfileBtn button {
+  background-color: #28a745;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.3s ease-in-out;
+}
+
+.profile .profileContainer .editProfileBtn button:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+.posts {
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .profile .profileContainer {
+    padding: 15px;
+  }
+
+  .profile .profileContainer .userInfo {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+
+  .profile .profileContainer .userInfo .leeft,
+.profile .profileContainer .userInfo .riight {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+  .profile .profileContainer .userInfo .center .info {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .profile .profileContainer .editProfileBtn {
+    margin-top: 15px;
+  }
+
+  .posts {
+    padding: 0 15px;
+  }
+
+  .profile .images .cover {
+    height: 200px;
+  }
+
+  .profile .images .profilePic {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile .images .cover {
+    height: 150px;
+  }
+
+  .profile .images .profilePic {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile .profileContainer {
+    padding: 10px;
+  }
+
+  .profile .profileContainer .userInfo .center span {
+    font-size: 20px;
+  }
+
+  .posts {
+    padding: 0 10px;
+  }
+}

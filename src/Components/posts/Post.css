@@ -1,0 +1,101 @@
+.post {
+  box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  border-radius: 20px;
+  background-color: var(--bg);
+  color: var(--textColor);
+  margin: 10px auto;
+
+}
+
+.post .container {
+  padding: 20px;
+  position: relative;
+}
+
+.post .container .user {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.post .container .user .userInfo {
+  gap: 20px;
+  display: flex;
+  align-items: center; /* Align items vertically */
+}
+
+.post .container .user .userInfo img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.post .container .user .userInfo .details {
+  display: flex;
+  flex-direction: column;
+}
+
+.post .container .user .userInfo .details .name {
+  font-weight: 500;
+}
+
+.post .container .user .userInfo .details .date {
+  font-size: 12px;
+  color: gray; /* Optional: add a color for better visibility */
+}
+
+.post .container .content {
+  margin: 20px 0px;
+}
+
+.post .container .content img {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.post .container .info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.post .container .info .items {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.post .container .more {
+  position: relative;
+  cursor: pointer;
+}
+
+.post .container .dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.post .container .dropdown-item {
+  padding: 10px 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: red;
+}
+
+.post .container .dropdown-item:hover {
+  background-color: #f5f5f5;
+}

@@ -1,0 +1,125 @@
+/* Register.css */
+.register {
+    display: flex;
+    height: 100vh;
+    background-color: rgba(193, 190, 190, 1);
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .card {
+    display: flex;
+    background-color: white;
+    width: 90%; /* Adjust width for smaller screens */
+    max-width: 800px; /* Set a maximum width for larger screens */
+    border-radius: 10px;
+    min-height: 500px;
+    overflow: hidden;
+    flex-direction: row-reverse; /* Keep the same layout */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+  }
+  
+  .left {
+    flex: 1;
+    background: linear-gradient(rgba(39, 11, 96, 0.5), rgba(39, 11, 96, 0.5)), 
+                url('https://images.pexels.com/photos/1266810/pexels-photo-1266810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') center;
+    background-size: cover;
+    padding: 20px; /* Adjust padding for smaller screens */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Reduce gap for smaller screens */
+    color: white;
+  }
+  
+  .left h1 {
+    font-size: 40px; /* Adjust font size for responsiveness */
+    line-height: 50px;
+  }
+  
+  .left p {
+    color: white;
+    font-size: 16px; /* Adjust font size for better readability */
+  }
+  
+  .left span {
+    font-size: 14px;
+  }
+  
+  .left button {
+    width: 50%;
+    color: purple;
+    padding: 10px;
+    border: none;
+    background-color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Add transition for hover effect */
+  }
+  
+  .left button:hover {
+    background-color: #f0f0f0; /* Light gray background on hover */
+  }
+  
+  .right {
+    flex: 1;
+    padding: 20px; /* Adjust padding for smaller screens */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Reduce gap for smaller screens */
+    justify-content: center;
+  }
+  
+  .right h1 {
+    color: #555;
+    font-size: 36px; /* Adjust font size for responsiveness */
+  }
+  
+  .right form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Reduce gap for smaller screens */
+  }
+  
+  .right input {
+    border: none;
+    border-bottom: 1px solid lightgray;
+    padding: 10px; /* Adjust padding for smaller screens */
+    font-size: 16px; /* Adjust font size for better readability */
+  }
+  
+  .right button {
+    width: 50%;
+    padding: 10px;
+    border: none;
+    background-color: #938eef;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Add transition for hover effect */
+  }
+  
+  .right button:hover {
+    background-color: #7b79d2; /* Darker background on hover */
+  }
+  
+  /* Mobile styles */
+  @media (max-width: 768px) {
+    .card {
+      flex-direction: column; /* Stack the left and right sections on smaller screens */
+      height: auto; /* Allow height to adjust */
+    }
+  
+    .left,
+    .right {
+      padding: 20px; /* Adjust padding */
+    }
+  
+    .left h1 {
+      font-size: 30px; /* Smaller font size for the heading */
+    }
+  
+    .right h1 {
+      font-size: 28px; /* Smaller font size for the heading */
+    }
+  }
+  

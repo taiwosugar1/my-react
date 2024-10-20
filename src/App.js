@@ -1,85 +1,80 @@
-
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import './App.css';
 import Login from './Pages/Login/Login';
 import Register from './Pages/Register/Register';
-import Navbar from './Components/Navbar/Navbar'
+import Navbar from './Components/Navbar/Navbar';
 import Leftbar from './Components/Leftbar/Leftbar';
 import Rightbar from './Components/Rightbar/Rightbar';
-
-import './Style.scss'
+import './Style.css';
 import { useContext } from 'react';
 import { DarkModeContext } from './context/DarkModeContext';
 import { AuthContext } from './context/authContext';
-
 import Home from './Pages/Home/Home';
-
- import Profile from './Pages/Profile/Profile';
-
-
+import Profile from './Pages/Profile/Profile';
+import FriendList from './Components/FriendList';
+import EditProfile from './Pages/Profile/EditProfile';
 
 function App() {
+  const { currentUser } = useContext(AuthContext);
+  const { darkMode } = useContext(DarkModeContext);
 
-  const {currentUser} = useContext(AuthContext)
-  console.log(currentUser)
-
-
-  const {darkMode}=useContext(DarkModeContext);
-  // console.log(darkMode)
-
-const Layout = () =>{
-  return(
-    <div className={`theme-${darkMode ? "dark" : "light"}`}>
-      <Navbar/>
-      <div style={{display: "flex"}}>
-        
-        <Leftbar/>
-
-        <div style={{flex: 6}}>
-          <Outlet/>
-         
+  const Layout = () => (
+    <div className={`main theme-${darkMode ? "dark" : "light"}`}>
+      <div className='nav'>
+        <Navbar />
+      </div>
+      
+      <div className='layout-container'>
+        <div className='leftbar-container'>
+          <Leftbar />
         </div>
-        
-
-        <Rightbar/>
+  
+        <div className='content-container'>
+          <Outlet />
+        </div>
+  
+        <div className='rightbar-container'>
+          <Rightbar />
+        </div>
       </div>
     </div>
-  )
-};
+  );
 
   const router = createBrowserRouter([
     {
       path: "/",
-      element:<Layout/>,
-      children:[{
-        path:"/",
-        element: <Home/>
-      },
-      {
-        path:"/profile/:id",
-        element: <Profile/>
-      },
- 
-  ]
+      element: <Layout />,
+      children: [
+        {
+          path: "home",
+          element: currentUser ? <Home /> : <Login />, // Redirect to Login if not logged in
+        },
+        {
+          path: "profile/:userId",
+          element: currentUser ? <Profile /> : <Login />, // Redirect to Login if not logged in
+        },
+        {
+          path: "friends",
+          element: currentUser ? <FriendList /> : <Login />, // Redirect to Login if not logged in
+        },
+        {
+          path: "edit-profile/:userId",
+          element: currentUser ? <EditProfile /> : <Login />, // Redirect to Login if not logged in
+        },
+      ],
     },
-    
     {
       path: "/login",
-      element: <Login/>,
+      element: !currentUser ? <Login /> : <Home />, // Redirect to Home if logged in
     },
     {
       path: "/register",
-      element: <Register/>,
+      element: !currentUser ? <Register /> : <Home />, // Redirect to Home if logged in
     },
   ]);
 
-
   return (
-    <div>
-         <RouterProvider router={router} />
-
-  
-    </div>
+    <RouterProvider router={router} />
   );
 }
 
