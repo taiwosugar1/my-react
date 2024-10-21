@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { collection, getDocs, query, where, addDoc, updateDoc, deleteDoc, doc, Timestamp, increment } from "firebase/firestore";
 import { AuthContext } from "../../context/authContext";
 import { db } from "../../firebase";
-import "./Comments.scss"
+import "./Comments.css"
 
 const Comments = ({ postId }) => {
     const { currentUser } = useContext(AuthContext);

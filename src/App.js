@@ -1,25 +1,23 @@
-import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
 import './App.css';
 import Login from './Pages/Login/Login';
 import Register from './Pages/Register/Register';
 import Navbar from './Components/Navbar/Navbar';
 import Leftbar from './Components/Leftbar/Leftbar';
 import Rightbar from './Components/Rightbar/Rightbar';
-import './Style.css';
 import { useContext } from 'react';
-import { DarkModeContext } from './context/DarkModeContext';
 import { AuthContext } from './context/authContext';
 import Home from './Pages/Home/Home';
 import Profile from './Pages/Profile/Profile';
 import FriendList from './Components/FriendList';
 import EditProfile from './Pages/Profile/EditProfile';
+import { DarkModeProvider } from './context/DarkModeContext';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
-  const { darkMode } = useContext(DarkModeContext);
 
   const Layout = () => (
-    <div className={`main theme-${darkMode ? "dark" : "light"}`}>
+    <div className={`main`}>
       <div className='nav'>
         <Navbar />
       </div>
@@ -30,7 +28,7 @@ function App() {
         </div>
   
         <div className='content-container'>
-          <Outlet />
+          <Outlet /> {/* This will need to be replaced in the Routes below */}
         </div>
   
         <div className='rightbar-container'>
@@ -40,41 +38,19 @@ function App() {
     </div>
   );
 
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Layout />,
-      children: [
-        {
-          path: "home",
-          element: currentUser ? <Home /> : <Login />, // Redirect to Login if not logged in
-        },
-        {
-          path: "profile/:userId",
-          element: currentUser ? <Profile /> : <Login />, // Redirect to Login if not logged in
-        },
-        {
-          path: "friends",
-          element: currentUser ? <FriendList /> : <Login />, // Redirect to Login if not logged in
-        },
-        {
-          path: "edit-profile/:userId",
-          element: currentUser ? <EditProfile /> : <Login />, // Redirect to Login if not logged in
-        },
-      ],
-    },
-    {
-      path: "/login",
-      element: !currentUser ? <Login /> : <Home />, // Redirect to Home if logged in
-    },
-    {
-      path: "/register",
-      element: !currentUser ? <Register /> : <Home />, // Redirect to Home if logged in
-    },
-  ]);
-
   return (
-    <RouterProvider router={router} />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route path="home" element={currentUser ? <Home /> : <Login />} />
+            <Route path="profile/:userId" element={currentUser ? <Profile /> : <Login />} />
+            <Route path="friends" element={currentUser ? <FriendList /> : <Login />} />
+            <Route path="edit-profile/:userId" element={currentUser ? <EditProfile /> : <Login />} />
+          </Route>
+          <Route path="/login" element={!currentUser ? <Login /> : <Home />} />
+          <Route path="/register" element={!currentUser ? <Register /> : <Home />} />
+        </Routes>
+      </Router>
   );
 }
 

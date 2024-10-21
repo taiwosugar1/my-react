@@ -4,14 +4,14 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
 import { Link, useNavigate } from 'react-router-dom';
-import { DarkModeContext } from '../../context/DarkModeContext';
 import { auth, db } from '../../firebase';
 import { AuthContext } from '../../context/authContext';
+import { DarkModeContext } from '../../context/DarkModeContext'; // Import DarkModeContext
 import { Search } from '@mui/icons-material';
 
 const Navbar = () => {
-  const { toggle, DarkMode } = useContext(DarkModeContext);
   const { currentUser, setCurrentUser, logout } = useContext(AuthContext);
+  const { darkMode, toggleDarkMode } = useContext(DarkModeContext); // Extract dark mode state and toggle function
   const [loading, setLoading] = useState(true);
   const [searchOpen, setSearchOpen] = useState(false); // State for toggling search bar
   const navigate = useNavigate();
@@ -57,23 +57,22 @@ const Navbar = () => {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div className="navbar">
+    <div className={`navbar ${darkMode ? 'dark-mode' : ''}`}>
       <div className="lleft">
         <Link to="/" style={{ textDecoration: 'none' }}>
           <span>Multibrand App</span>
         </Link>
-       
 
         {/* Toggle between dark mode icons */}
-        {DarkMode ? (
-          <WbSunnyOutlinedIcon onClick={toggle} className="clickable" />
+        {darkMode ? (
+          <WbSunnyOutlinedIcon onClick={toggleDarkMode} className="clickable" />
         ) : (
-          <DarkModeOutlinedIcon onClick={toggle} className="clickable" />
+          <DarkModeOutlinedIcon onClick={toggleDarkMode} className="clickable" />
         )}
 
         {/* Search bar and toggle button for mobile */}
         <button className="search-toggle-btn" onClick={toggleSearch}>
-          {searchOpen ? <Search/> : <Search/>}
+          <Search />
         </button>
         <div className={`search ${searchOpen ? 'open' : ''}`}>
           <input type="text" placeholder="Search..." />
