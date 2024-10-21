@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
+  padding: 15px 0;
   background: var(--bg-color);
   color: var(--text-color);
   border-bottom: 1px solid var(--border-color);
@@ -83,11 +83,12 @@
 }
 
 .search input {
-  padding: 8px;
-  border: 1px solid var(--border-color);
+  padding:10px;
+  border: 1px solid grey;
   border-radius: 4px;
   font-size: 14px;
-  width: 200px;
+  background: var(--bg-color);
+  width: 400px;
 }
 
 @media (max-width: 768px) {
