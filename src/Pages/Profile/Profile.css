@@ -3,22 +3,24 @@
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  margin: 10px auto;
   font-family: 'Arial', sans-serif;
   color: #333;
-  background-color: #f9f9f9;
+  background-color: var(--bg-color);
+  width: 90%;
 }
 
 .profile .images {
   position: relative;
-  width: 100%;
+  width: 90%;
   height: auto;
-  max-width: 1000px;
   margin-bottom: 20px;
 }
 
 .profile .images .cover {
   width: 100%;
   height: 350px;
+  margin: 10px auto;
   object-fit: cover;
   border-radius: 10px;
   transition: transform 0.4s ease-in-out;
@@ -47,19 +49,22 @@
 }
 
 .profile .profileContainer {
-  width: 100%;
-  max-width: 1000px;
-  background-color: #fff;
+  width: 80%;
+  background: var(--bg-color);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   margin-top: 60px;
+  border: 1px solid grey;
 }
 
 .profile .profileContainer .userInfo {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 90%;
+  margin: auto;
+  color: var(--text-color);
 }
 
 .profile .profileContainer .userInfo .leeft,
@@ -68,11 +73,12 @@
   align-items: center;
   flex-direction: column;
   gap: 10px;
+  color: var(--text-color);
 }
 
 .profile .profileContainer .userInfo .leeft a,
 .profile .profileContainer .userInfo .riight a {
-  color: #333;
+  color: var(--text-color);
   transition: color 0.3s, transform 0.4s ease-in-out;
 }
 
@@ -84,13 +90,14 @@
 
 .profile .profileContainer .userInfo .center {
   text-align: center;
+  color: var(--text-color);
 }
 
 .profile .profileContainer .userInfo .center span {
   display: block;
   font-size: 24px;
   font-weight: bold;
-  color: #333;
+  color: var(--text-color);
   margin-bottom: 10px;
 }
 
