@@ -1,7 +1,10 @@
 .home {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background-color: #f5f5f5; /* Replace themed("bgSoft") with a static value */
-  color: #333; /* Replace themed("textColor") with a static value */
-  padding: 20px 70px;
+  color: #333;
 }
 
 /* Mobile styles */

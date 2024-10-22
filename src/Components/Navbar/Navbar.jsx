@@ -85,7 +85,7 @@ const Navbar = () => {
             <button className="clickable" onClick={() => navigate('/friends')}>Friends</button>
             <Link to={"/home"}> <HomeOutlinedIcon className="clickable" /></Link>
             <Link to={`/profile/${currentUser.uid}`} className="user">
-              <img src={currentUser.profilePic} alt={`${currentUser.name}'s profile`} />
+              <img src={currentUser.profilePic || "https://via.placeholder.com/600" } alt={`${currentUser.name}'s profile`} />
               <span>{currentUser.name}</span>
             </Link>
             <button className="clickable" onClick={handleLogout}>Logout</button>

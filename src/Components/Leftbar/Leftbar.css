@@ -5,7 +5,8 @@
   padding-left: 20px;
   height: calc(100vh - 70px);
   overflow: scroll;
-  background-color: #f0f0f0; /* Replace themed("bg") with static value */
+  background: var(--bg-color);
+  border-right: 1px solid var(--border-color);
   color: #333; /* Replace themed("textColor") with static value */
   -moz-box-shadow: 0px 2px 16px 2px rgba(0, 0, 0, 0.09);
   -webkit-box-shadow: 0px 2px 16px 2px rgba(0, 0, 0, 0.09);

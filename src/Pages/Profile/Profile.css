@@ -2,12 +2,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
   margin: 10px auto;
   font-family: 'Arial', sans-serif;
   color: #333;
   background-color: var(--bg-color);
-  width: 90%;
+  width: 100%;
 }
 
 .profile .images {
@@ -79,6 +78,7 @@
 .profile .profileContainer .userInfo .leeft a,
 .profile .profileContainer .userInfo .riight a {
   color: var(--text-color);
+  font-size: 16px;
   transition: color 0.3s, transform 0.4s ease-in-out;
 }
 
@@ -91,11 +91,12 @@
 .profile .profileContainer .userInfo .center {
   text-align: center;
   color: var(--text-color);
+  font-size: 1rem;
 }
 
 .profile .profileContainer .userInfo .center span {
   display: block;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: bold;
   color: var(--text-color);
   margin-bottom: 10px;

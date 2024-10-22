@@ -1,6 +1,6 @@
 /* Dark Mode Variables */
 :root {
-    --bg-color: #ffffff;
+    --bg-color: #f5f1f1;;
     --text-color: #333333;
     --primary-color: #007bff;
     --primary-color-dark: #0056b3;
@@ -15,7 +15,11 @@
     --border-color: #555555;
   }
   
-
+.main{
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
 /* App.css or Style.scss */
 .layout-container {
     display: flex;
@@ -23,6 +27,7 @@
     width: 100%;
     position: relative;
     background: var(--bg-color);
+    border: 0.5px solid var( --border-color);
   }
   
   .leftbar-container {
@@ -33,13 +38,11 @@
   .rightbar-container {
     flex: 1;
     max-width: 300px;
-    top: 0;
-    position: sticky;
   }
   
   .content-container {
-    flex: 4;
-    max-width: 800px;
+    flex: 6;
+    max-width: 700px;
   }
 
   /* Scroll to Top Button */

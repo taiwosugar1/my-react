@@ -11,7 +11,7 @@ import Home from './Pages/Home/Home';
 import Profile from './Pages/Profile/Profile';
 import FriendList from './Components/FriendList';
 import EditProfile from './Pages/Profile/EditProfile';
-import { DarkModeProvider } from './context/DarkModeContext';
+
 
 function App() {
   const { currentUser } = useContext(AuthContext);

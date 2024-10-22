@@ -109,6 +109,30 @@ const Rightbar = () => {
     }
   };
 
+  // Function to delete a friend
+  const handleDeleteFriend = async (userId) => {
+    try {
+      const currentUserDocRef = doc(db, 'users', currentUser.uid);
+      const otherUserDocRef = doc(db, 'users', userId);
+
+      // Remove each other from the friends list
+      await updateDoc(currentUserDocRef, {
+        friends: arrayRemove(userId), // Remove the other user from the current user's friends list
+      });
+
+      await updateDoc(otherUserDocRef, {
+        friends: arrayRemove(currentUser.uid), // Remove the current user from the other user's friends list
+      });
+
+      // Update state to reflect the deletion
+      setFriends(friends.filter((id) => id !== userId));
+
+      alert('Friend deleted.'); // Alert message
+    } catch (error) {
+      console.error('Error deleting friend:', error);
+    }
+  };
+
   return (
     <div className="rightbar">
       <div className="container">
@@ -118,17 +142,21 @@ const Rightbar = () => {
             registeredUsers
               .filter(user => user.id !== currentUser.uid) // Filter out the current user
               .map((user) => (
-                
                 <div className="user" key={user.id}>
                   <Link to={`/profile/${user.id}`}>
                   <div className="userinfo">
-                    <img src={user.profilePic} alt={user.name} />
+                    <img src={user.profilePic || "https://via.placeholder.com/600"} alt={user.name}  />
                     <span>{user.name}</span>
                   </div>
                   </Link>
                  
                   {friends.includes(user.id) ? (
-                    <button disabled>Friends</button> // Display "Friends" if already accepted
+                    <>
+                      <button disabled>Friends</button>
+                      <button onClick={() => handleDeleteFriend(user.id)}  className='delete-friend'>
+                        Delete Friend
+                      </button>
+                    </>
                   ) : friendRequests.includes(user.id) ? (
                     <>
                       <button onClick={() => handleAcceptFriendRequest(user.id)}>
