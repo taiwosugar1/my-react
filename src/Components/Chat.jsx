@@ -12,9 +12,10 @@ const Chat = ({ currentUser, friend }) => {
     useEffect(() => {
         const fetchMessages = () => {
             const messagesRef = collection(db, 'messages');
+            // Fetch messages where the current user or the friend is involved
             const q = query(
                 messagesRef,
-                where('participants', 'array-contains-any', [currentUser.uid, friend.uid])
+                where('participants', 'array-contains', currentUser.uid) // Fetch messages where current user is a participant
             );
 
             const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -22,6 +23,8 @@ const Chat = ({ currentUser, friend }) => {
                 querySnapshot.forEach((doc) => {
                     fetchedMessages.push({ id: doc.id, ...doc.data() });
                 });
+                // Sort messages by timestamp to ensure the correct order
+                fetchedMessages.sort((a, b) => a.timestamp.toDate() - b.timestamp.toDate());
                 setMessages(fetchedMessages);
             });
 
@@ -49,7 +52,7 @@ const Chat = ({ currentUser, friend }) => {
             text: newMessage,
             sender: currentUser.uid,
             recipient: friend.uid,
-            participants: [currentUser.uid, friend.uid],
+            participants: [currentUser.uid, friend.uid], // Ensure both users are in participants
             timestamp: Timestamp.fromDate(new Date()),
         });
 
