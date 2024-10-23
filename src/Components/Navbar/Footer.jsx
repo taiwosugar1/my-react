@@ -29,7 +29,7 @@ const Footer = () => {
         <DarkModeOutlinedIcon onClick={toggleDarkMode} className="footer-icon" />
       )}
 
-      <Link to="/chat">
+      <Link to="/friends">
         <ChatBubbleOutlineIcon className="footer-icon" />
       </Link>
 

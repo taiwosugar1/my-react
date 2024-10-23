@@ -48,6 +48,7 @@ function App() {
             <Route path="friends" element={currentUser ? <FriendList /> : <Login />} />
             <Route path="edit-profile/:userId" element={currentUser ? <EditProfile /> : <Login />} />
             <Route path="chat/:userId" element={currentUser ? <Chat /> : <Login />} />
+            
           </Route>
           <Route path="/login" element={!currentUser ? <Login /> : <Home />} />
           <Route path="/register" element={!currentUser ? <Register /> : <Home />} />

@@ -60,8 +60,52 @@
   cursor: pointer;
 }
 
+.call-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.call-controls button {
+  padding: 10px 16px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.call-controls button:hover {
+  background-color: #218838;
+}
+
+.video-call {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.video-call video {
+  width: 45%;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+}
+
+
+
+  .call-controls button {
+    padding: 8px 12px;
+  }
+
+
 @media (max-width: 768px) {
   .chat-container{
     max-width: 90%;
   }
+
+  .video-call video {
+    width: 48%;
+  }
+
 }

@@ -38,7 +38,7 @@ const Register = () => {
       });
 
       alert('Registration successful!');
-      navigate('/');
+      navigate('home');
     } catch (error) {
       console.error('Registration error:', error);
       alert('Error registering: ' + error.message);

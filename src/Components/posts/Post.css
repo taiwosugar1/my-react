@@ -29,7 +29,7 @@
   gap: 20px;
   display: flex;
   align-items: center; 
-  background-color: var(--bg-color);  
+  background-color: var(--bg);  
 }
 
 .post .container .user .userInfo img {
@@ -147,21 +147,22 @@
   transform: scale(1.05); 
 }
 .share-options {
-  width: 50%;
+  width: 40%;
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow);
   z-index: 10; 
 }
 
 .share-item {
   padding: 10px 15px;
   cursor: pointer;
+  color: #333;
 }
 
 .share-item:hover {
-  background-color: #f0f0f0;
+  background: #f0f0f0;
 }
 
 
