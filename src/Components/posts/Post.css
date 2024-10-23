@@ -1,17 +1,17 @@
 .post {
   box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.78);
   border-radius: 20px;
-  background-color: var(--bg);
-  color: var(--textColor);
+  background-color: var(--bg-color); 
+  color: var(--text-Color); 
   margin: 10px auto;
   width: 90%;
   border: 1px solid grey;
-  transition: box-shadow 0.3s ease, transform 0.3s ease; /* Add transition for hover effects */
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .post:hover {
-  transform: translateY(-5px); /* Slightly lift the post on hover */
-  box-shadow: 0px 0px 35px -5px rgba(0, 0, 0, 0.88); /* Enhance shadow on hover */
+  transform: translateY(-5px); 
+  box-shadow: 0px 0px 35px -5px rgba(0, 0, 0, 0.88);
 }
 
 .post .container {
@@ -28,7 +28,8 @@
 .post .container .user .userInfo {
   gap: 20px;
   display: flex;
-  align-items: center; /* Align items vertically */
+  align-items: center; 
+  background-color: var(--bg-color);  
 }
 
 .post .container .user .userInfo img {
@@ -36,11 +37,11 @@
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
-  transition: transform 0.3s ease; /* Add transition for image scaling */
+  transition: transform 0.3s ease; 
 }
 
 .post .container .user .userInfo img:hover {
-  transform: scale(1.1); /* Scale image on hover */
+  transform: scale(1.1);
 }
 
 .post .container .user .userInfo .details {
@@ -49,16 +50,18 @@
 }
 
 .post .container .user .userInfo .details .name {
-  font-weight: 500;
+  font-weight: 500; 
+  color: var(--text-Color); 
 }
 
 .post .container .user .userInfo .details .date {
   font-size: 12px;
-  color: gray; /* Optional: add a color for better visibility */
+  color: rgb(155, 155, 155);
+  
 }
 
 .post .container .content {
-  margin: 20px 0px;
+  margin: 20px 0px; 
 }
 
 .post .container .content img {
@@ -67,17 +70,18 @@
   object-fit: cover;
   border-radius: 10px;
   margin-top: 20px;
-  transition: transform 0.3s ease; /* Add transition for image scaling */
+  transition: transform 0.3s ease;
 }
 
 .post .container .content img:hover {
-  transform: scale(1.05); /* Scale image on hover */
+  transform: scale(1.05); 
 }
 
 .post .container .info {
   display: flex;
   align-items: center;
   gap: 20px;
+  color: var(--text-Color); 
 }
 
 .post .container .info .items {
@@ -86,7 +90,8 @@
   gap: 10px;
   cursor: pointer;
   font-size: 14px;
-  transition: color 0.3s ease; /* Add transition for hover effects */
+  transition: color 0.3s ease;
+  color: var(--text-Color); 
 }
 
 .post .container .info .items:hover {
@@ -130,16 +135,16 @@
 }
 
 .post-video {
-  max-width: 100%; /* Ensures the video fits within the container */
-  height: auto; /* Maintain aspect ratio */
+  max-width: 100%; 
+  height: auto; 
   margin-top: 10px;
-  border-radius: 8px; /* Optional: Adds rounded corners to the video */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a slight shadow */
-  transition: transform 0.3s ease; /* Add transition for video scaling */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  transition: transform 0.3s ease; 
 }
 
 .post-video:hover {
-  transform: scale(1.05); /* Scale video on hover */
+  transform: scale(1.05); 
 }
 .share-options {
   width: 50%;
@@ -147,7 +152,7 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  z-index: 10; /* Make sure it appears above other elements */
+  z-index: 10; 
 }
 
 .share-item {
@@ -156,21 +161,22 @@
 }
 
 .share-item:hover {
-  background-color: #f0f0f0; /* Add a hover effect */
+  background-color: #f0f0f0;
 }
 
-/* Optional: Style adjustments for mobile screens */
+
 @media (max-width: 768px) {
   .post {
-    width: 100%; /* Adjust width for smaller screens */
+    width: 100%; 
   }
 
   .post .container {
-    padding: 10px; /* Slightly reduce padding for smaller screens */
+    padding: 10px; 
   }
 
   .post .container .info .items {
-    font-size: 12px; /* Adjust font size for smaller screens */
+    font-size: 12px; 
+    color: var(--text-Color); 
   }
   .share-item{
     font-size: 12px;

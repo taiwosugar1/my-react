@@ -12,16 +12,16 @@
       left: 0;
       right: 0;
       height: 60px;
-      background-color: var(--bg-color);
+      background: var(--bg);
       border-top: 1px solid #ddd;
       justify-content: space-around;
       align-items: center;
-      box-shadow: 0px -1px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: var(--shadow);
       z-index: 7010;
     }
   
     .footer-icon {
-      color: var(--text-Color);
+      color: var(--text);
       font-size: 24px;
       cursor: pointer;
     }

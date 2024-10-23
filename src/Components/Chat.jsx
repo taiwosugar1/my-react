@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { collection, query, where, onSnapshot, addDoc, Timestamp } from 'firebase/firestore';
 import { db } from '../firebase';
 import './Chat.css';
@@ -6,6 +6,7 @@ import './Chat.css';
 const Chat = ({ currentUser, friend }) => {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
+    const messagesEndRef = useRef(null); // Ref to track the end of the message list
 
     // Fetch messages between the current user and their friend
     useEffect(() => {
@@ -32,6 +33,13 @@ const Chat = ({ currentUser, friend }) => {
         }
     }, [currentUser.uid, friend]);
 
+    // Auto-scroll to the bottom of the messages whenever new messages are added
+    useEffect(() => {
+        if (messagesEndRef.current) {
+            messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [messages]);
+
     // Handle sending a new message
     const sendMessage = async (e) => {
         e.preventDefault();
@@ -55,9 +63,11 @@ const Chat = ({ currentUser, friend }) => {
                 {messages.map((msg) => (
                     <div key={msg.id} className={`message ${msg.sender === currentUser.uid ? 'sent' : 'received'}`}>
                         <p>{msg.text}</p>
-                        <span>{new Date(msg.timestamp.toDate()).toLocaleTimeString()}</span>
+                        <span className='chat-date'>{new Date(msg.timestamp.toDate()).toLocaleTimeString()}</span>
                     </div>
                 ))}
+                {/* This div will be used as the auto-scroll target */}
+                <div ref={messagesEndRef} />
             </div>
             <form onSubmit={sendMessage} className="chat-form">
                 <input

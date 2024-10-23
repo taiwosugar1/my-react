@@ -3,8 +3,8 @@
   gap: 10px;
   height: 250px;
   margin-bottom: 20px;
-  background-color: var(--bg); 
-  color: var(--textColor); 
+  background-color: var(--bg-color); 
+  color: var(--text-Color); 
   overflow-x: auto;
 }
 

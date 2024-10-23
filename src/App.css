@@ -1,18 +1,20 @@
 /* Dark Mode Variables */
 :root {
-    --bg-color: #f5f1f1;;
-    --text-color: #333333;
-    --primary-color: #007bff;
-    --primary-color-dark: #0056b3;
-    --border-color: #dddddd;
+    --bg: #f5f1f1;;
+    --text: #333333;
+    --primary: #007bff;
+    --primary-dark: #0056b3;
+    --border: #dddddd;
+    --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
   :root.dark-mode {
-    --bg-color: #333333;
-    --text-color: #ffffff;
-    --primary-color: #f39c12;
-    --primary-color-dark: #e67e22;
-    --border-color: #555555;
+    --bg: #333333;
+    --text: #ffffff;
+    --primary: #f39c12;
+    --primary-dark: #e67e22;
+    --border: #555555;
+    --shadow: 0 2px 4px rgba(156, 155, 155, 0.348);
   }
   
 .main{
@@ -28,8 +30,8 @@
     flex-direction: row;
     width: 100%;
     position: relative;
-    background: var(--bg-color);
-    border: 0.5px solid var( --border-color);
+    background: var(--bg);
+    border: 0.5px solid var( --border);
   }
   
   .leftbar-container {

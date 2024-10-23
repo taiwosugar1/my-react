@@ -1,6 +1,7 @@
 .chat-container {
   width: 100%;
   max-width: 500px;
+  margin-bottom: 100px;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 16px;
@@ -9,6 +10,7 @@
 }
 
 .messages {
+  width: 100%;
   flex: 1;
   overflow-y: auto;
   margin-bottom: 16px;
@@ -16,18 +18,25 @@
 
 .message {
   margin: 4px 0;
-  padding: 8px;
+  padding: 3px;
   border-radius: 4px;
+  border: 0.3px solid grey;
 }
 
 .sent {
   background-color: #dcf8c6;
   align-self: flex-end;
+  width: max-content;
 }
 
 .received {
   background-color: #f1f1f1;
   align-self: flex-start;
+  width: max-content;
+}
+
+.chat-date{
+  font-size: 10px;
 }
 
 .chat-form {
@@ -36,7 +45,7 @@
 
 .chat-form input {
   flex: 1;
-  padding: 8px;
+  padding:14px 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
@@ -49,4 +58,10 @@
   color: white;
   border-radius: 4px;
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .chat-container{
+    max-width: 90%;
+  }
 }
