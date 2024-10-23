@@ -2,9 +2,8 @@
   max-width: 500px;
   margin: 0 auto;
   padding: 25px;
-  background-color: #f7f7f7;
+  background: var(--bg);
   border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .editProfile h2 {
@@ -43,5 +42,11 @@
 
 .editProfile form button:hover {
   background-color: #0056b3;
+}
+
+@media screen and (max-width: 768px) {
+   .editProfile{
+    width: 94%;
+   }
 }
 
