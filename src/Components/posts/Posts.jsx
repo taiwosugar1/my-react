@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { collection, query, where, onSnapshot } from 'firebase/firestore';
 import { db } from '../../firebase';
 import Post from './Post'; 
-import "./Posts.css"
+import "./Posts.css";
 
 const Posts = ({ userId, isProfile }) => {
   const [posts, setPosts] = useState([]); // Store posts
   const [loading, setLoading] = useState(true); // Loading state
 
   useEffect(() => {
+    const unsubscribe = () => {};
+
     const fetchPosts = async () => {
       try {
         let q;
@@ -20,17 +22,21 @@ const Posts = ({ userId, isProfile }) => {
           q = collection(db, 'posts'); // Fetch all posts
         }
 
-        const querySnapshot = await getDocs(q);
-        const fetchedPosts = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-        setPosts(fetchedPosts);
+        // Subscribe to the query with onSnapshot for real-time updates
+        unsubscribe = onSnapshot(q, (querySnapshot) => {
+          const fetchedPosts = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+          setPosts(fetchedPosts);
+          setLoading(false); // Set loading to false after fetching posts
+        });
       } catch (error) {
         console.error('Error fetching posts:', error);
-      } finally {
-        setLoading(false);
+        setLoading(false); // Ensure loading is set to false on error
       }
     };
 
     fetchPosts();
+
+    return () => unsubscribe(); // Cleanup the listener on component unmount
   }, [userId, isProfile]);
 
   if (loading) {
@@ -42,7 +48,7 @@ const Posts = ({ userId, isProfile }) => {
   }
 
   return (
-    <div className="posts" style={{display: "flex", flexDirection:"column", alignItems:"center", justifyContent: "center" , width:"90%", margin:"auto"}} >
+    <div className="posts" style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", width: "90%", margin: "auto" }}>
       {posts.map((post) => (
         <Post key={post.id} post={post} /> 
       ))}

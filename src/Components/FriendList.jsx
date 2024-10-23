@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { db } from '../firebase';
 import { getDoc, doc, updateDoc, arrayRemove, arrayUnion } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
-import './FriendList.css'; 
+import './FriendList.css';
 import Chat from './Chat';
 
 const FriendList = () => {
@@ -11,9 +11,11 @@ const FriendList = () => {
   const [friendRequests, setFriendRequests] = useState([]);
   const [friendRequestDetails, setFriendRequestDetails] = useState({});
   const [loading, setLoading] = useState(true);
-  const [selectedFriendId, setSelectedFriendId] = useState(null); // Track the selected friend
+  const [selectedFriend, setSelectedFriend] = useState(null);
+  
   const auth = getAuth();
   const currentUserId = auth.currentUser?.uid; // Get the current user's ID
+  const currentUser = { uid: currentUserId, name: auth.currentUser?.displayName }; // Add displayName or any other user info if needed
 
   useEffect(() => {
     const fetchFriendsAndRequests = async () => {
@@ -22,10 +24,10 @@ const FriendList = () => {
       try {
         const userDocRef = doc(db, 'users', currentUserId);
         const userDoc = await getDoc(userDocRef);
-        
+
         if (userDoc.exists()) {
           const userData = userDoc.data();
-          setFriendRequests(userData.friendRequests || []); // Get friendRequests from user's data
+          setFriendRequests(userData.friendRequests || []);
 
           // Fetch friends' data
           const friendsData = await Promise.all(userData.friends.map(async (friendId) => {
@@ -81,8 +83,7 @@ const FriendList = () => {
         const updatedRequests = prevRequests.filter((req) => req !== requestId);
         return updatedRequests;
       });
-      
-      // Optionally, fetch the friend data if needed
+
       const friendDoc = await getDoc(doc(db, 'users', requestId));
       if (friendDoc.exists()) {
         setFriends((prevFriends) => [...prevFriends, { id: requestId, ...friendDoc.data() }]); // Add to friends list
@@ -96,13 +97,17 @@ const FriendList = () => {
     try {
       const userDocRef = doc(db, 'users', currentUserId);
       await updateDoc(userDocRef, {
-        friendRequests: arrayRemove(requestId), // Remove the request from the friend requests
+        friendRequests: arrayRemove(requestId),
       });
 
       setFriendRequests((prevRequests) => prevRequests.filter((req) => req !== requestId));
     } catch (error) {
       console.error('Error declining friend request:', error);
     }
+  };
+
+  const handleSelectFriend = (friend) => {
+    setSelectedFriend(friend); // Set the selected friend for chatting
   };
 
   if (loading) {
@@ -126,7 +131,7 @@ const FriendList = () => {
                 />
                 <span className="friend-name">{friend.name}</span>
               </Link>
-              <button onClick={() => setSelectedFriendId(friend.id)}>Chat</button> {/* Chat button */}
+              <button onClick={() => handleSelectFriend(friend)}>Chat</button>
             </li>
           ))}
         </ul>
@@ -140,7 +145,7 @@ const FriendList = () => {
           <ul>
             {friendRequests.map((requestId) => (
               <li key={requestId} className="request-item">
-                <span>{friendRequestDetails[requestId] || 'Loading...'}</span> {/* Display friend's name */}
+                <span>{friendRequestDetails[requestId] || 'Loading...'}</span>
                 <button onClick={() => handleAcceptRequest(requestId)}>Accept</button>
                 <button onClick={() => handleDeclineRequest(requestId)}>Decline</button>
               </li>
@@ -149,7 +154,9 @@ const FriendList = () => {
         )}
       </div>
 
-      {selectedFriendId && <Chat friendId={selectedFriendId} />} {/* Render chat when a friend is selected */}
+      {selectedFriend && (
+        <Chat currentUser={currentUser} friend={selectedFriend} />
+      )}
     </div>
   );
 };

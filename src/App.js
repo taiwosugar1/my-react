@@ -11,6 +11,8 @@ import Home from './Pages/Home/Home';
 import Profile from './Pages/Profile/Profile';
 import FriendList from './Components/FriendList';
 import EditProfile from './Pages/Profile/EditProfile';
+import Chat from './Components/Chat';
+import Footer from './Components/Navbar/Footer';
 
 
 function App() {
@@ -18,9 +20,7 @@ function App() {
 
   const Layout = () => (
     <div className={`main`}>
-      <div className='nav'>
         <Navbar />
-      </div>
       
       <div className='layout-container'>
         <div className='leftbar-container'>
@@ -35,6 +35,7 @@ function App() {
           <Rightbar />
         </div>
       </div>
+      <Footer />
     </div>
   );
 
@@ -46,6 +47,7 @@ function App() {
             <Route path="profile/:userId" element={currentUser ? <Profile /> : <Login />} />
             <Route path="friends" element={currentUser ? <FriendList /> : <Login />} />
             <Route path="edit-profile/:userId" element={currentUser ? <EditProfile /> : <Login />} />
+            <Route path="chat/:userId" element={currentUser ? <Chat /> : <Login />} />
           </Route>
           <Route path="/login" element={!currentUser ? <Login /> : <Home />} />
           <Route path="/register" element={!currentUser ? <Register /> : <Home />} />

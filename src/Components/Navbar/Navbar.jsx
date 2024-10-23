@@ -59,15 +59,19 @@ const Navbar = () => {
   return (
     <div className={`navbar ${darkMode ? 'dark-mode' : ''}`}>
       <div className="lleft">
-        <Link to="/" style={{ textDecoration: 'none' }}>
-          <span>Multibrand App</span>
+        <Link to="/" style={{ textDecoration: 'none' }} className='logo'>
+          <span>Chat Naija</span>
         </Link>
 
         {/* Toggle between dark mode icons */}
         {darkMode ? (
-          <WbSunnyOutlinedIcon onClick={toggleDarkMode} className="clickable" />
+          <span className="clickable dark">
+           <WbSunnyOutlinedIcon onClick={toggleDarkMode} />
+         </span>
         ) : (
-          <DarkModeOutlinedIcon onClick={toggleDarkMode} className="clickable" />
+          <span className="clickable dark">
+           <DarkModeOutlinedIcon onClick={toggleDarkMode} />
+          </span>
         )}
 
         {/* Search bar and toggle button for mobile */}
@@ -82,18 +86,22 @@ const Navbar = () => {
       <div className="rright">
         {currentUser ? (
           <>
-            <button className="clickable" onClick={() => navigate('/friends')}>Friends</button>
-            <Link to={"/home"}> <HomeOutlinedIcon className="clickable" /></Link>
+            <button className="clickable friends" onClick={() => navigate('/friends')}>Friends</button>
+           
+           <span  className="clickable house">
+               <Link to={"/home"}> <HomeOutlinedIcon /></Link>
+           </span>
+
             <Link to={`/profile/${currentUser.uid}`} className="user">
-              <img src={currentUser.profilePic || "https://via.placeholder.com/600" } alt={`${currentUser.name}'s profile`} />
+              <img src={currentUser.profilePic || "https://via.placeholder.com/600" } alt={`${currentUser.name}'s profile`}  className='using'/>
               <span>{currentUser.name}</span>
             </Link>
-            <button className="clickable" onClick={handleLogout}>Logout</button>
+            <button className="clickable logout" onClick={handleLogout}>Logout</button>
           </>
         ) : (
           <>
-            <Link to="/login" className="clickable">Login</Link>
-            <Link to="/register" className="clickable">Register</Link>
+            <Link to="/login" className="clickable logout">Login</Link>
+            <Link to="/register" className="clickable register">Register</Link>
           </>
         )}
       </div>

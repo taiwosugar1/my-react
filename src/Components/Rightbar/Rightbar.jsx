@@ -11,6 +11,7 @@ const Rightbar = () => {
   const [friendRequests, setFriendRequests] = useState([]); // Store received friend requests
   const [friends, setFriends] = useState([]); // Store the user's accepted friends
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Track user's login status
+  const [sentFriendRequests, setSentFriendRequests] = useState([]); // Track sent friend requests
 
   useEffect(() => {
     const auth = getAuth(); // Initialize Firebase Auth
@@ -34,7 +35,7 @@ const Rightbar = () => {
         }
       };
 
-      // Fetch the current user's friend requests and friends list
+      // Fetch the current user's friend requests, sent friend requests, and friends list
       const fetchUserDetails = async () => {
         if (currentUser) {
           const userDocRef = doc(db, 'users', currentUser.uid); // Reference to the current user's document
@@ -44,6 +45,7 @@ const Rightbar = () => {
             const userData = userDoc.data();
             setFriendRequests(userData.friendRequests || []); // Get friendRequests from the user's document
             setFriends(userData.friends || []); // Get friends from the user's document
+            setSentFriendRequests(userData.sentFriendRequests || []); // Get sent friend requests
           } else {
             console.log("No such document!"); // Handle case where document does not exist
           }
@@ -59,27 +61,41 @@ const Rightbar = () => {
   const handleSendFriendRequest = async (userId) => {
     try {
       const userDocRef = doc(db, 'users', userId);
+      const currentUserDocRef = doc(db, 'users', currentUser.uid); // Current user's doc reference
+
+      // Update both the target user and the current user's sent requests
       await updateDoc(userDocRef, {
         friendRequests: arrayUnion(currentUser.uid), // Add current user's ID to the target user's friendRequests
       });
-      setFriendRequests((prevRequests) => [...prevRequests, userId]); // Update state with new request
+      await updateDoc(currentUserDocRef, {
+        sentFriendRequests: arrayUnion(userId), // Add the target user's ID to the current user's sentFriendRequests
+      });
+
+      setSentFriendRequests((prevRequests) => [...prevRequests, userId]); // Update state with new request
       alert('Friend request sent!'); // Alert message
     } catch (error) {
       console.error('Error sending friend request:', error);
     }
   };
 
-  // Function to delete a friend request
-  const handleDeleteFriendRequest = async (userId) => {
+  // Function to delete a sent friend request
+  const handleDeleteSentFriendRequest = async (userId) => {
     try {
       const userDocRef = doc(db, 'users', userId);
+      const currentUserDocRef = doc(db, 'users', currentUser.uid); // Current user's doc reference
+
+      // Remove the request from both the target user and the current user's sent requests
       await updateDoc(userDocRef, {
         friendRequests: arrayRemove(currentUser.uid), // Remove current user's ID from the target user's friendRequests
       });
-      setFriendRequests(friendRequests.filter((id) => id !== userId)); // Update state
-      alert('Friend request deleted.'); // Alert message
+      await updateDoc(currentUserDocRef, {
+        sentFriendRequests: arrayRemove(userId), // Remove the target user's ID from the current user's sentFriendRequests
+      });
+
+      setSentFriendRequests(sentFriendRequests.filter((id) => id !== userId)); // Update state
+      alert('Sent friend request deleted.'); // Alert message
     } catch (error) {
-      console.error('Error deleting friend request:', error);
+      console.error('Error deleting sent friend request:', error);
     }
   };
 
@@ -92,11 +108,11 @@ const Rightbar = () => {
       // Add each other to the friends list
       await updateDoc(currentUserDocRef, {
         friends: arrayUnion(userId), // Add the other user to the current user's friends list
-        friendRequests: arrayRemove(userId) // Remove the friend request from the current user
+        friendRequests: arrayRemove(userId), // Remove the friend request from the current user
       });
 
       await updateDoc(otherUserDocRef, {
-        friends: arrayUnion(currentUser.uid) // Add the current user to the other user's friends list
+        friends: arrayUnion(currentUser.uid), // Add the current user to the other user's friends list
       });
 
       // Update state to reflect accepted friend
@@ -144,16 +160,15 @@ const Rightbar = () => {
               .map((user) => (
                 <div className="user" key={user.id}>
                   <Link to={`/profile/${user.id}`}>
-                  <div className="userinfo">
-                    <img src={user.profilePic || "https://via.placeholder.com/600"} alt={user.name}  />
-                    <span>{user.name}</span>
-                  </div>
+                    <div className="userinfo">
+                      <img src={user.profilePic || "https://via.placeholder.com/600"} alt={user.name} />
+                      <span>{user.name}</span>
+                    </div>
                   </Link>
-                 
                   {friends.includes(user.id) ? (
                     <>
                       <button disabled>Friends</button>
-                      <button onClick={() => handleDeleteFriend(user.id)}  className='delete-friend'>
+                      <button onClick={() => handleDeleteFriend(user.id)} className='delete-friend'>
                         Delete Friend
                       </button>
                     </>
@@ -162,10 +177,14 @@ const Rightbar = () => {
                       <button onClick={() => handleAcceptFriendRequest(user.id)}>
                         Accept Request
                       </button>
-                      <button onClick={() => handleDeleteFriendRequest(user.id)}>
+                      <button onClick={() => handleDeleteSentFriendRequest(user.id)}>
                         Delete Request
                       </button>
                     </>
+                  ) : sentFriendRequests.includes(user.id) ? (
+                    <button onClick={() => handleDeleteSentFriendRequest(user.id)}>
+                      Cancel Request
+                    </button>
                   ) : (
                     <button onClick={() => handleSendFriendRequest(user.id)}>
                       Send Friend Request
